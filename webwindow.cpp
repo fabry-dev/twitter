@@ -18,6 +18,10 @@ webWindow::webWindow(QObject *parent, QString PATH):QObject(parent),PATH(PATH)
     networkManager = new QNetworkAccessManager(this);
     activeFloors.clear();
     postData();
+
+
+
+
 }
 
 
@@ -136,12 +140,14 @@ void webWindow::nuTag()
 
     tagBuf.clear();
     //tag.toInt() //1 - 19
-    int level = (tag.toInt()-1)/2-2;
+
+
+    int level = (tag.toInt())/2-2;
 
     QString pos;
-    if(tag.toInt()%2)
-        pos = "-";
-    else pos = "+";
+    if((tag.toInt())%2)
+        pos = "+";
+    else pos = "-";
 
 
     getRFID(level);
