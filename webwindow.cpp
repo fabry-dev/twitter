@@ -13,6 +13,8 @@ webWindow::webWindow(QObject *parent, QString PATH):QObject(parent),PATH(PATH)
     connect( notifier,SIGNAL(activated(int)),this,SLOT(handleRFID()));
 
 
+
+
     networkManager = new QNetworkAccessManager(this);
     activeFloors.clear();
     postData();
@@ -109,8 +111,15 @@ void webWindow::nuTag()
     for(auto i:tagBuf)
         tag.append(QString::number((i-1)%10));
 
-
-    qDebug()<<"tag:"<<tag;
-
     tagBuf.clear();
+    //tag.toInt() //1 - 19
+    int level = (tag.toInt()-1)/2-2;
+
+    QString pos;
+    if(tag.toInt()%2)
+        pos = "-";
+    else pos = "+";
+
+    qDebug()<<"level "<<level<<pos;
+
 }
