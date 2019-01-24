@@ -66,6 +66,8 @@ void webWindow::getButton(int b)
 {
     b-=2;
 
+
+    qDebug()<<"button"<<b;
     if(std::find(activeFloors.begin(), activeFloors.end(), b) != activeFloors.end())
     {
         //already active
@@ -143,6 +145,6 @@ void webWindow::nuTag()
 
 
     getRFID(level);
-    qDebug()<<"level "<<level<<pos;
+  qDebug()<<"RFID level "<<level<<pos;
 
 }
