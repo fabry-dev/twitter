@@ -110,7 +110,7 @@ void webWindow::nuTag()
         tag.append(QString::number(i-1));
 
 
-    qDebug()<<"tag:"<<tag;
+    qDebug()<<"tag:"<<tag<<tagBuf;
 
     tagBuf.clear();
 }
