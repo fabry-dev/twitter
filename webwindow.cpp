@@ -91,7 +91,9 @@ void webWindow::handleRFID()
 
             int buf = ev.code;
 
-            qDebug()<<buf;
+            tagBuf.push_back(buf);
+            if(tagBuf.size()>=19)
+                nuTag();
 
     }
 
