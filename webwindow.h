@@ -27,10 +27,13 @@ private:
     std::vector<int> activeFloors;
     QSocketNotifier *notifier;
     int fd;
+    std::vector<int>tagBuf;
+    void nuTag();
 private slots:
     void postData();
     void getButton(int b);
     void handleRFID();
+
 
 };
 

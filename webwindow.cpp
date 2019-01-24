@@ -2,12 +2,12 @@
 
 webWindow::webWindow(QObject *parent, QString PATH):QObject(parent),PATH(PATH)
 {
-     QString fileName = "/dev/input/by-id/usb-SpringCard_ProxNRoll_RFID_Scanner_517F095D-event-kbd";
-     fd = open(fileName.toUtf8().data(), O_RDONLY|O_NONBLOCK);
-     if( fd==-1 ){
-         qWarning("can not open RFID socket");
-         //return;
-     }
+    QString fileName = "/dev/input/by-id/usb-SpringCard_ProxNRoll_RFID_Scanner_517F095D-event-kbd";
+    fd = open(fileName.toUtf8().data(), O_RDONLY|O_NONBLOCK);
+    if( fd==-1 ){
+        qWarning("can not open RFID socket");
+        //return;
+    }
     notifier = new QSocketNotifier( fd, QSocketNotifier::Read,this);
 
     connect( notifier,SIGNAL(activated(int)),this,SLOT(handleRFID()));
@@ -36,7 +36,7 @@ void webWindow::postData()
 
     qDebug()<<"activating floors: "<<buf;
 
-   // buf = "{\"data\":{\"floors\":["+buf+"]}}";
+    // buf = "{\"data\":{\"floors\":["+buf+"]}}";
 
     buf = "{\"data\":{\"floors\":[]}}";
     QByteArray jsonString = buf.toUtf8();
@@ -90,8 +90,19 @@ void webWindow::handleRFID()
 
         if((ev.type == 1)&&(ev.value==0))
         {
-           qDebug()<<ev.code;
+
+                tagBuf.push_back(ev.code);
+                if(tagBuf.size()>=4)
+                    nuTag();
         }
     }
 
+}
+
+
+void webWindow::nuTag()
+{
+
+    qDebug()<<"tag:"<<tagBuf;
+    tagBuf.clear();
 }
