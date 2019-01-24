@@ -107,10 +107,10 @@ void webWindow::nuTag()
     QString tag = "";
 
     for(auto i:tagBuf)
-        tag.append(QString::number(i-1));
+        tag.append(QString::number((i-1)%10));
 
 
-    qDebug()<<"tag:"<<tag<<tagBuf;
+    qDebug()<<"tag:"<<tag;
 
     tagBuf.clear();
 }
