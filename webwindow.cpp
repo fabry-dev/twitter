@@ -62,7 +62,7 @@ void webWindow::postData()
 
 void webWindow::getButton(int b)
 {
-
+    b-=2;
 
     if(std::find(activeFloors.begin(), activeFloors.end(), b) != activeFloors.end()) {
         //already active
