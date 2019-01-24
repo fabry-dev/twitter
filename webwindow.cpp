@@ -88,18 +88,11 @@ void webWindow::handleRFID()
     {
         // qDebug()<<ev.code;
 
-        if((ev.code == 96)||(ev.code == 28))
-        {
-            qDebug()<<"enter";
 
-
-        }
-        else
-        {
             int buf = ev.code;
 
             qDebug()<<buf;
-        }
+
     }
 
 }
