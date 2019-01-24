@@ -88,12 +88,17 @@ void webWindow::handleRFID()
     {
         // qDebug()<<ev.code;
 
-        if((ev.type == 1)&&(ev.value==0))
+        if((ev.code == 96)||(ev.code == 28))
         {
+            qDebug()<<"enter";
 
-                tagBuf.push_back(ev.code);
-                if(tagBuf.size()>=4)
-                    nuTag();
+
+        }
+        else
+        {
+            int buf = ev.code;
+
+            qDebug()<<buf;
         }
     }
 
