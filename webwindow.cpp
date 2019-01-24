@@ -86,15 +86,12 @@ void webWindow::handleRFID()
 
     while(read(fd, &ev, sizeof(struct input_event))>0)
     {
-        // qDebug()<<ev.code;
+       qDebug()<<"ev"<<ev.type<<ev.value<<ev.code;
 
+        if((ev.type == 1)&&(ev.value==0))
+        {
 
-            int buf = ev.code;
-
-            tagBuf.push_back(buf);
-            if(tagBuf.size()>=19)
-                nuTag();
-
+        }
     }
 
 }
@@ -104,5 +101,5 @@ void webWindow::nuTag()
 {
 
     qDebug()<<"tag:"<<tagBuf;
-    tagBuf.clear();
+
 }
