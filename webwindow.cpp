@@ -86,10 +86,10 @@ void webWindow::handleRFID()
 
     while(read(fd, &ev, sizeof(struct input_event))>0)
     {
-       qDebug()<<"ev"<<ev.type<<ev.value<<ev.code;
 
         if((ev.type == 1)&&(ev.value==0))
         {
+            qDebug()<<"ev"<<ev.code;
 
         }
     }
