@@ -103,6 +103,14 @@ void webWindow::handleRFID()
 void webWindow::nuTag()
 {
 
-    qDebug()<<"tag:"<<tagBuf;
 
+    QString tag = "";
+
+    for(auto i:tagBuf)
+        tag.append(i-1);
+
+
+    qDebug()<<"tag:"<<tag;
+
+    tagBuf.clear();
 }
