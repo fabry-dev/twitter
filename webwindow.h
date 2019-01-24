@@ -29,6 +29,7 @@ private:
     int fd;
     std::vector<int>tagBuf;
     void nuTag();
+    void getRFID(int r);
 private slots:
     void postData();
     void getButton(int b);

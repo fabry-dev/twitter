@@ -66,7 +66,8 @@ void webWindow::getButton(int b)
 {
     b-=2;
 
-    if(std::find(activeFloors.begin(), activeFloors.end(), b) != activeFloors.end()) {
+    if(std::find(activeFloors.begin(), activeFloors.end(), b) != activeFloors.end())
+    {
         //already active
     }
     else
@@ -77,6 +78,26 @@ void webWindow::getButton(int b)
     }
 
 }
+
+
+
+void webWindow::getRFID(int r)
+{
+
+
+    if(std::find(activeFloors.begin(), activeFloors.end(), r) != activeFloors.end())
+    {
+        activeFloors.erase(std::remove(activeFloors.begin(), activeFloors.end(), r), activeFloors.end());
+        postData();
+    }
+    else
+    {
+
+    }
+
+}
+
+
 
 
 void webWindow::handleRFID()
@@ -120,6 +141,8 @@ void webWindow::nuTag()
         pos = "-";
     else pos = "+";
 
+
+    getRFID(level);
     qDebug()<<"level "<<level<<pos;
 
 }
