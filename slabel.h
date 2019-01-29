@@ -23,13 +23,31 @@
 class slabel : public QLabel
 {
     Q_OBJECT
+private:
+    QProcess *chrome;
+
 public:
-   slabel(QLabel *parent):QLabel(parent){}
-   // virtual ~slabel() {}
+    slabel(QLabel *parent):QLabel(parent){
+        chrome = new QProcess(this);
+        start();
+        // connect(chrome,SIGNAL(finished(int)),qApp,SLOT(quit()));
+    }
+    // virtual ~slabel() {}
 protected:
-    void mousePressEvent( QMouseEvent* ev ){emit clicked();}
+    void mousePressEvent( QMouseEvent* ev ){
+
+        chrome->terminate();
+
+        connect(chrome,SIGNAL(finished(int)),this,SLOT(start()));
+    }
 signals:
     void clicked();
+private slots:
+    void start()
+    {
+        chrome->start("google-chrome --incognito  --kiosk http://elevator.webagencydubai.com/");
+
+    }
 
 };
 

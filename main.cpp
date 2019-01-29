@@ -91,8 +91,7 @@ int main(int argc, char *argv[])
     }
 
 
-    QProcess *chrome = new QProcess(&a);
-    chrome->start("google-chrome --incognito  --kiosk http://elevator.webagencydubai.com/");
+
 
 
 
@@ -100,7 +99,7 @@ int main(int argc, char *argv[])
     webWindow *ww = new webWindow(NULL,PATH);
 
     a.connect(sw,SIGNAL(nuData(int)),ww,SLOT(getButton(int)));
-    a.connect(chrome,SIGNAL(finished(int)),qApp,SLOT(quit()));
+
 
 
     slabel *w = new slabel(NULL);
@@ -113,7 +112,7 @@ int main(int argc, char *argv[])
     w->raise();
     w->setStyleSheet("QLabel { background-color : black; }");
     w->show();
-    a.connect(w,SIGNAL(clicked()),chrome,SLOT(terminate()));
+
 
 
 
