@@ -17,6 +17,7 @@ webWindow::webWindow(QObject *parent, QString PATH):QObject(parent),PATH(PATH)
 
     networkManager = new QNetworkAccessManager(this);
     activeFloors.clear();
+
     postData();
 
 

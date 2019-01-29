@@ -8,10 +8,10 @@
 #include "webwindow.h"
 #include "serialwatcher.h"
 
-#define PATH_DEFAULT (QString)"/home/fred/Dropbox/Taf/Cassiopee/book/files/"
-#define TIMEOUT 15000
+#define PATH_DEFAULT (QString)"/home/fred/Dropbox/Taf/Cassiopee/twitter/files/"
 
-#define defaultSpeed (10)
+
+
 
 int main(int argc, char *argv[])
 
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 
 
     QProcess *chrome = new QProcess(&a);
-   // chrome->start("google-chrome   --kiosk http://elevator.webagencydubai.com/");
+    chrome->start("google-chrome --incognito  --kiosk http://elevator.webagencydubai.com/");
 
 
 
