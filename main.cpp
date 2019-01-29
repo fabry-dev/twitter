@@ -7,8 +7,20 @@
 #include "QFile"
 #include "webwindow.h"
 #include "serialwatcher.h"
-
+#include "qlabel.h"
+#include "slabel.h"
 #define PATH_DEFAULT (QString)"/home/fred/Dropbox/Taf/Cassiopee/twitter/files/"
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -88,8 +100,20 @@ int main(int argc, char *argv[])
     webWindow *ww = new webWindow(NULL,PATH);
 
     a.connect(sw,SIGNAL(nuData(int)),ww,SLOT(getButton(int)));
-
     a.connect(chrome,SIGNAL(finished(int)),qApp,SLOT(quit()));
+
+
+    slabel *w = new slabel(NULL);
+
+    w->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::Window | Qt::FramelessWindowHint);
+    QScreen* screen0 = a.screens().at(0);
+    int W = 10;
+    int H = 10;
+    w->setGeometry(screen0->geometry().x()+screen0->size().width()-W,screen0->geometry().y()+screen0->size().height()-H,W,H);
+    w->raise();
+    w->setStyleSheet("QLabel { background-color : black; }");
+    w->show();
+    a.connect(w,SIGNAL(clicked()),chrome,SLOT(terminate()));
 
 
 

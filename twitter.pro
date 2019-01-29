@@ -24,7 +24,8 @@ SOURCES += main.cpp \
 
 HEADERS  += \
     webwindow.h \
-    serialwatcher.h
+    serialwatcher.h \
+    slabel.h
 
 
 
