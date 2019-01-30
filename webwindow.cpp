@@ -42,11 +42,12 @@ void webWindow::postData()
 
     qDebug()<<"activating floors: "<<buf;
 
-    // buf = "{\"data\":{\"floors\":["+buf+"]}}";
+     buf = "{\"data\":{\"floors\":["+buf+"]}}";
 
-    buf = "{\"data\":{\"floors\":[]}}";
+    //buf = "{\"data\":{\"floors\":[]}}";
     QByteArray jsonString = buf.toUtf8();
-    QByteArray postDataSize = QByteArray::number(jsonString.size());
+     QByteArray postDataSize = QByteArray::number(jsonString.size());
+  // QUrl serviceURL("142.93.241.114");
     QUrl serviceURL("http://elevator.webagencydubai.com/elevatordata");
     QNetworkRequest request(serviceURL);
     request.setRawHeader("Content-Type", "application/json");
@@ -59,7 +60,7 @@ void webWindow::postData()
     QByteArray data = reply->readAll();
     QString dataReply(data);
 
-    qDebug()<<dataReply;
+    qDebug()<<dataReply.left(6);
 
 
 }
