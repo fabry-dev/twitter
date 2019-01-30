@@ -32,7 +32,8 @@ public:
         start();
         // connect(chrome,SIGNAL(finished(int)),qApp,SLOT(quit()));
     }
-    // virtual ~slabel() {}
+
+
 protected:
     void mousePressEvent( QMouseEvent* ev ){
 
