@@ -51,10 +51,27 @@ void serialWatcher::readData()
 {
 
     const QByteArray data = port->readAll();
-    uchar b = data.at(0);
+    uchar b = data.at(0)-100;
+
+    if(b==4)
+        b=5;
+    else if(b==5)
+        b=4;
+    else if(b==2)
+        b=3;
+    else if(b==3)
+        b=2;
+    else if(b==0)
+        b=1;
+    else if(b==1)
+        b=0;
+    else if(b==-1)
+        b=-2;
+    else if(b==-2)
+        b=-1;
 
 
-    emit nuData(b-100);
+    emit nuData(b);
 
 }
 
