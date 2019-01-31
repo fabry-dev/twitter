@@ -106,14 +106,23 @@ int main(int argc, char *argv[])
 
     w->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::Window | Qt::FramelessWindowHint);
     QScreen* screen0 = a.screens().at(0);
-    int W = 10;
-    int H = 10;
+    int W = 20;
+    int H = 20;
     w->setGeometry(screen0->geometry().x()+screen0->size().width()-W,screen0->geometry().y()+screen0->size().height()-H,W,H);
     w->raise();
     w->setStyleSheet("QLabel { background-color : black; }");
     w->show();
 
 
+
+    slabel2 *w2 = new slabel2(NULL);
+
+    w2->setWindowFlags(Qt::WindowStaysOnTopHint|Qt::Window | Qt::FramelessWindowHint);
+    w2->setGeometry(screen0->geometry().x(),screen0->geometry().y()+screen0->size().height()-H,W,H);
+    w2->raise();
+    w2->setStyleSheet("QLabel { background-color : black; }");
+    w2->show();
+    a.connect(w2,SIGNAL(clicked()),w,SLOT(closeForReal()));
 
 
 

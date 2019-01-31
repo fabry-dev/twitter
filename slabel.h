@@ -50,8 +50,40 @@ private slots:
 
     }
 
+    void closeForReal()
+    {
+        chrome->terminate();
+        qApp->closeAllWindows();
+    }
 };
 
+
+
+
+
+class slabel2 : public QLabel
+{
+    Q_OBJECT
+private:
+    QProcess *chrome;
+
+public:
+    slabel2(QLabel *parent):QLabel(parent){
+
+
+    }
+
+
+protected:
+    void mousePressEvent( QMouseEvent* ev ){
+
+        emit clicked();
+    }
+signals:
+    void clicked();
+
+
+};
 
 
 
