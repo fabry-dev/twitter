@@ -14,6 +14,20 @@
 #include <unistd.h>
 
 
+class specialTimer:public QTimer
+{
+    Q_OBJECT
+public:
+    specialTimer(QObject *parent=NULL,int id=0):QTimer(parent),id(id) {connect(this,SIGNAL(timeout()),this,SLOT(goTimeOut()));}
+private:
+    int id;
+private slots:
+    void goTimeOut(){emit triggered(id);}
+signals:
+    void triggered(int);
+};
+
+
 class webWindow : public QObject
 {
     Q_OBJECT
@@ -29,11 +43,13 @@ private:
     int fd;
     std::vector<int>tagBuf;
     void nuTag();
-    void getRFID(int r);
+
+    std::vector<specialTimer*> timers;
 private slots:
     void postData();
     void getButton(int b);
     void handleRFID();
+    void getRFID(int r);
 
 
 };

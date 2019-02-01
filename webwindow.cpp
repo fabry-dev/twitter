@@ -1,4 +1,5 @@
 #include "webwindow.h"
+#define RESET_DELAY (10*1000)
 
 webWindow::webWindow(QObject *parent, QString PATH):QObject(parent),PATH(PATH)
 {
@@ -13,6 +14,15 @@ webWindow::webWindow(QObject *parent, QString PATH):QObject(parent),PATH(PATH)
     connect( notifier,SIGNAL(activated(int)),this,SLOT(handleRFID()));
 
 
+    for(int i=-2;i<=6;i++)
+    {
+
+        specialTimer *t = new specialTimer(this,i);
+        connect(t,SIGNAL(triggered(int)),this,SLOT(getRFID(int)));
+        t->setSingleShot(true);
+        t->setInterval(RESET_DELAY);
+        timers.push_back(t);
+    }
 
 
     networkManager = new QNetworkAccessManager(this);
@@ -40,12 +50,12 @@ void webWindow::postData()
 
     qDebug()<<"activating floors: "<<buf;
 
-     buf = "{\"data\":{\"floors\":["+buf+"]}}";
+    buf = "{\"data\":{\"floors\":["+buf+"]}}";
 
     //buf = "{\"data\":{\"floors\":[]}}";
     QByteArray jsonString = buf.toUtf8();
-     QByteArray postDataSize = QByteArray::number(jsonString.size());
-  // QUrl serviceURL("142.93.241.114");
+    QByteArray postDataSize = QByteArray::number(jsonString.size());
+    // QUrl serviceURL("142.93.241.114");
     QUrl serviceURL("http://elevator.webagencydubai.com/elevatordata");
     QNetworkRequest request(serviceURL);
     request.setRawHeader("Content-Type", "application/json");
@@ -67,26 +77,8 @@ void webWindow::postData()
 
 void webWindow::getButton(int b)
 {
-    b-=2;
 
-
-    if(b==4)
-        b=5;
-    else if(b==5)
-        b=4;
-    else if(b==2)
-        b=3;
-    else if(b==3)
-        b=2;
-    else if(b==0)
-        b=1;
-    else if(b==1)
-        b=0;
-    else if(b==-1)
-        b=-2;
-    else if(b==-2)
-        b=-1;
-
+    timers[b+2]->start();
 
 
     qDebug()<<"button"<<b;
@@ -107,7 +99,7 @@ void webWindow::getButton(int b)
 
 void webWindow::getRFID(int r)
 {
-
+    timers[r+2]->stop();
 
     if(std::find(activeFloors.begin(), activeFloors.end(), r) != activeFloors.end())
     {
@@ -169,6 +161,6 @@ void webWindow::nuTag()
 
 
     getRFID(level);
-  qDebug()<<"RFID level "<<level<<pos;
+    qDebug()<<"RFID level "<<level<<pos;
 
 }
