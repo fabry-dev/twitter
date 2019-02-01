@@ -29,7 +29,7 @@ private:
 public:
     slabel(QLabel *parent):QLabel(parent){
         chrome = new QProcess(this);
-        start();
+       // start();
         // connect(chrome,SIGNAL(finished(int)),qApp,SLOT(quit()));
     }
 
