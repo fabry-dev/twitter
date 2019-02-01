@@ -1,5 +1,5 @@
 #include "webwindow.h"
-#define RESET_DELAY (10*1000)
+#define RESET_DELAY (60*1000)
 
 webWindow::webWindow(QObject *parent, QString PATH):QObject(parent),PATH(PATH)
 {
@@ -77,6 +77,7 @@ void webWindow::postData()
 
 void webWindow::getButton(int b)
 {
+
 
     timers[b+2]->start();
 

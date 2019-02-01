@@ -51,7 +51,9 @@ void serialWatcher::readData()
 {
 
     const QByteArray data = port->readAll();
-    uchar b = data.at(0)-100;
+
+
+    int b = data.at(0)-100;
 
 
 
